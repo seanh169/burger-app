@@ -3,6 +3,7 @@ import React from 'react';
 import classes from './Order.css';
 
 const order = ( props ) => {
+    console.log(props);
     const ingredients = [];
 
     for ( let ingredientName in props.ingredients ) {
@@ -30,6 +31,8 @@ const order = ( props ) => {
         <div className={classes.Order}>
             <p>Ingredients: {ingredientOutput}</p>
             <p>Price: <strong>USD {Number.parseFloat( props.price ).toFixed( 2 )}</strong></p>
+            <p>Order Date/Time {props.date}</p>
+            
         </div>
     );
 };

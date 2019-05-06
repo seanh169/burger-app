@@ -42,7 +42,8 @@ class Auth extends Component {
             },
             
         },
-        isSignUp: true
+        isSignUp: true,
+        errorMessage: []
     }
     componentDidMount(){
         if(!this.props.buildingBurger && this.props.authRedirectPath !== '/'){
@@ -103,9 +104,29 @@ class Auth extends Component {
         let errorMessage = null;
 
         if(this.props.error){
-            errorMessage = (
-                <p>{this.props.error.message}</p>
-            );
+            console.log(this.props.error);
+            if(this.props.error.message === 'EMAIL_EXISTS'){
+                errorMessage = (
+                    <p className={classes.Warning}>This email already exists. Please click the switch button at the bottom to sign in or create a new account using a different email address.</p>
+                );
+            }
+            else if(this.props.error.message === 'INVALID_PASSWORD'){
+                errorMessage = (
+                    <p className={classes.Warning}>Incorrect Password. Please check your password, and try again.</p>
+                );
+            }
+            else if(this.props.error.message === 'USER_DISABLED'){
+                errorMessage = (
+                    <p className={classes.Warning}>This user has been disabled by the application administrator.</p>
+                );
+            }
+            else{
+                errorMessage = (
+                    <p className={classes.Warning}>{this.props.error.message}</p>
+                );
+            }
+           
+           
         }
         let authRedirect = null;
         if(this.props.isAuthenticated){
@@ -116,7 +137,7 @@ class Auth extends Component {
             <div className={classes.Auth}>
             {authRedirect}
                 {errorMessage}
-                <div style={{'color': 'red', 'font-weight': 'bold'}}>{this.state.isSignUp ? 'REGISTER' : 'LOGIN'}</div>
+                <div style={{'color': 'red', 'fontWeight': 'bold'}}>{this.state.isSignUp ? 'REGISTER' : 'LOGIN'}</div>
                 <form onSubmit={this.submitHandler}>
                 {form}
                 <Button btnType="Success" >SUBMIT</Button>

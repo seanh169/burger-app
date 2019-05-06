@@ -10,6 +10,7 @@
 <li>Authentication and user authentication state management using JSON web tokens </li>
 <li>Utility methods to avoid mutations</li>
 <li>Unit testing using the jest and enzyme libraries</li>
+<li>Lazy loading for performance improvements</li>
 </ul>
 
 ## This project is current live at : https://react-my-burger-c0f8f.firebaseapp.com/
